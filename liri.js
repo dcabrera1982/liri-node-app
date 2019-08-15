@@ -40,6 +40,15 @@ function bandInfo() {
 }
 
 
+function spotifyInfo() {
+   if (userInput === undefined) {
+       userInput = "The SignS"
+   } 
+
+   // search to find an artist, album, or track.
+   spotify.search({ type: 'track', query: userInput, limit: 4 }),
+}
+
 
 
 
