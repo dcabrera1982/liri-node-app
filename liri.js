@@ -1,9 +1,10 @@
 require("dotenv").config();
 // var fs = require("fs");
-// var keys = require("./keys.js");
+var keys = require("./keys.js");
 var axios = require("axios");
 // var inquirer = require("inquirer");
-// var spotify = new Spotify(keys.spotify);
+var Spotify = require('node-spotify-api');
+var spotify = new Spotify(keys.spotify);
 
 
 var command = process.argv[2];
@@ -42,12 +43,25 @@ function bandInfo() {
 
 function spotifyInfo() {
    if (userInput === undefined) {
-       userInput = "The SignS"
+       userInput = "The Sign"
    } 
 
    // search to find an artist, album, or track.
-   spotify.search({ type: 'track', query: userInput, limit: 4 }),
-}
+   spotify.search({ type: 'track', query: userInput, limit: 4 })
+   .then(function (response) {
+
+    var songInfo = response.tracks.items;
+
+    for (let i = 0; i < songInfo.length; i++) {
+        console.log("Artist Name: " + (songInfo[i.artists[0].name]));
+        console.log("Song Name: " + (songInfo[i].name));
+        console.log("Song Preview: " + (songInfo[i].preview_url));
+        console.log("Album Name: " + (songInfo[i].album.name));
+        console.log("\n----------------------------\n");
+    }
+
+   })
+};
 
 
 
