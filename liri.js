@@ -42,7 +42,7 @@ function bandInfo() {
 
 
 function spotifyInfo() {
-   if (userInput === " ") {
+   if (userInput === undefined) {
        userInput = "The Sign"
    } 
 
@@ -63,6 +63,37 @@ function spotifyInfo() {
    })
 };
 
+function movieInfo() {
+    if (userInput === undefined) {
+        userInput = 'Mr. Nobody';
+        console.log(" If you haven't watched " + userInput +" then you should: http://www.imdb.com/title/tt0485947/\n It's on Netflix!");
+    }
+
+    // Run a request with axios to the OMDB API with the movie specified
+// var queryUrl = "http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy";
+
+// This line is just to help us debug against the actual URL.
+// console.log(queryUrl);
+
+axios.get("http://www.omdbapi.com/?t=" + userInput + "&y=&plot=short&apikey=trilogy").then(
+  function(response) {
+    console.log(" Movie Title: " + response.data.Title, "\n",
+                "Year movie was released: " + response.data.Year, "\n",
+                "IMDB Rating: " + response.data.imdbRating, "\n",
+                "Country of Movie Production: " + response.data.Country, "\n",
+                "Movie Language: " + response.data.Language, "\n",
+                "Movie Plot: " + response.data.Plot, "\n",
+                "Movie Actors: " + response.data.Actors, "\n",
+                "Rotten Tomatoes Rating: " + response.data.Ratings[1].Value);
+  })
+  .catch(function(error) {
+    if (error.response) {
+      
+        console.log(error);
+    }
+  });
+
+}
 
 
 
