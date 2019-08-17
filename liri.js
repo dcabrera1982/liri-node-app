@@ -42,7 +42,7 @@ function bandInfo() {
 
 
 function spotifyInfo() {
-   if (userInput === undefined) {
+   if (userInput === " ") {
        userInput = "The Sign"
    } 
 
@@ -52,8 +52,8 @@ function spotifyInfo() {
 
     var songInfo = response.tracks.items;
 
-    for (let i = 0; i < songInfo.length; i++) {
-        console.log("Artist Name: " + (songInfo[i.artists[0].name]));
+    for (i = 0; i < songInfo.length; i++) {
+        console.log("Artist Name: " + (songInfo[i].artists[0].name));
         console.log("Song Name: " + (songInfo[i].name));
         console.log("Song Preview: " + (songInfo[i].preview_url));
         console.log("Album Name: " + (songInfo[i].album.name));
